@@ -1,0 +1,18 @@
+export default function Hero() {
+  return (
+    <div className="hero">
+      <div className="hero-content text-center flex flex-col gap-4">
+        <h1 className="text-5xl font-bold">
+          Friends to keep close in your life
+        </h1>
+        <p className="text-[#64748B] max-w-xl">
+          Your personal shelf of meaningful connections. Browse, tend, and
+          nurture the relationships that matter most.
+        </p>
+        <button className="btn btn-primary text-base font-semibold bg-green-800 text-white mt-4">
+          + Add a friend
+        </button>
+      </div>
+    </div>
+  );
+}
