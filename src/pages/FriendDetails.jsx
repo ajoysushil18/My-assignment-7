@@ -21,22 +21,24 @@ export default function FriendDetails() {
   const expectedFriend = friends.find((friend) => friend.id == id);
   const status = expectedFriend.status;
 
-  const { currTimeLine, setCurrTimeLine } = useContext(TimelineContext)
+  const { currTimeLine, setCurrTimeLine } = useContext(TimelineContext);
 
   const getFormattedDate = () => {
-  const now = new Date();
+    const now = new Date();
 
-  return now.toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric"
-  }).replace(",", "");
-};
+    return now
+      .toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      })
+      .replace(",", "");
+  };
 
   const handleCall = () => {
     const date = getFormattedDate();
     const newMessage = ["Call", date, expectedFriend.name];
-    toast.success(`${expectedFriend.name} is called`)
+    toast.success(`${expectedFriend.name} is called`);
     setCurrTimeLine([...currTimeLine, newMessage]);
   };
 
@@ -46,7 +48,7 @@ export default function FriendDetails() {
     toast.success(`${expectedFriend.name} is messaged`);
     setCurrTimeLine([...currTimeLine, newMessage]);
   };
-  
+
   const handleVideoCall = () => {
     const date = getFormattedDate();
     const newMessage = ["Video", date, expectedFriend.name];
@@ -55,7 +57,7 @@ export default function FriendDetails() {
   };
 
   return (
-    <div className="grid grid-cols-3 py-10 px-6 md:px-20 bg-[#F8FAFC] gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-3 py-10 px-6 md:px-10 lg:px-20 bg-[#F8FAFC] gap-4">
       <div className="flex flex-col">
         <div className="flex flex-col items-center justify-center bg-white rounded-md p-6">
           <img
@@ -63,7 +65,7 @@ export default function FriendDetails() {
             alt={expectedFriend.name}
             className="w-20 h-20 rounded-full mb-5"
           />
-          <h2 className="text-[#1F2937] font-semibold text-xl mb-1">
+          <h2 className="text-[#1F2937] font-semibold text-lg lg:text-xl mb-1 text-center">
             {expectedFriend.name}
           </h2>
           <div
@@ -73,15 +75,18 @@ export default function FriendDetails() {
           </div>
           <div className="flex gap-2">
             {expectedFriend.tags.map((tag, index) => (
-              <div key={index} className="badge bg-[#CBFADB] text-[#244D3F] rounded-full font-medium text-xs mt-2 mb-3">
+              <div
+                key={index}
+                className="badge bg-[#CBFADB] text-[#244D3F] rounded-full font-medium text-xs mt-2 mb-3"
+              >
                 {tag.toUpperCase()}
               </div>
             ))}
           </div>
-          <p className="text-[#64748B] font-medium mt-3 italic">
+          <p className="text-[#64748B] font-medium mt-3 italic text-center text-sm lg:text-base">
             "{expectedFriend.bio}"
           </p>
-          <p className="text-[#64748B] text-sm">
+          <p className="text-[#64748B] text-sm mt-2 text-center">
             Email: {expectedFriend.email}
           </p>
         </div>
@@ -99,18 +104,24 @@ export default function FriendDetails() {
       </div>
       <div className="col-span-2">
         <div className="grid grid-cols-3 gap-4 mb-6">
-          <StatusCard
-            number={expectedFriend.days_since_contact}
-            text="Days Since Contact"
-          ></StatusCard>
-          <StatusCard
-            number={expectedFriend.goal}
-            text="Goal (Days)"
-          ></StatusCard>
-          <StatusCard
-            number={expectedFriend.next_due_date}
-            text="Next Due"
-          ></StatusCard>
+          <div className="bg-white p-4 flex flex-col items-center justify-center rounded-lg gap-2 text-center">
+            <h2 className="text-[#244D3F] font-semibold text-lg lg:text-[22px]">
+              {expectedFriend.days_since_contact}
+            </h2>
+            <p className="text-[#64748B] text-sm lg:text-lg">Days Since Contact</p>
+          </div>
+          <div className="bg-white p-4 flex flex-col items-center justify-center rounded-lg gap-2 text-center">
+            <h2 className="text-[#244D3F] font-semibold text-lg lg:text-[22px]">
+              {expectedFriend.goal}
+            </h2>
+            <p className="text-[#64748B] text-sm lg:text-lg">Goal (Days)</p>
+          </div>
+          <div className="bg-white p-4 flex flex-col items-center justify-center rounded-lg gap-2 text-center">
+            <h2 className="text-[#244D3F] font-semibold text-lg lg:text-[22px]">
+              {expectedFriend.next_due_date}
+            </h2>
+            <p className="text-[#64748B] text-sm lg:text-lg">Next Due</p>
+          </div>
         </div>
         <div className="bg-white rounded-md p-6 mb-6">
           <div className="flex justify-between">

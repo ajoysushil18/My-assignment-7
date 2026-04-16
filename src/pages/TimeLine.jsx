@@ -1,6 +1,7 @@
 import { useContext, useRef, useState } from "react";
 import HistoryCard from "../components/unique/timelineComponents/historyCard";
 import { TimelineContext } from "../context/TimeLineContext";
+import { CircleX } from "lucide-react";
 
 export default function TimeLine() {
   const { currTimeLine } = useContext(TimelineContext);
@@ -31,18 +32,34 @@ export default function TimeLine() {
           </li>
         </ul>
       </details>
-      {currTimeLine.map(
-        (message, index) =>
-          (filter === "all" && <HistoryCard key={index} message={message} />) ||
-          (filter === "Call" && message[0] === "Call" && (
-            <HistoryCard key={index} message={message} />
-          )) ||
-          (filter === "Video" && message[0] === "Video" && (
-            <HistoryCard key={index} message={message} />
-          )) ||
-          (filter === "Text" && message[0] === "Text" && (
-            <HistoryCard key={index} message={message} />
-          )),
+      {currTimeLine.length === 0 ? (
+        <div className="hero bg-white p-10 rounded-md">
+          <div className="hero-content text-center flex flex-col gap-4">
+            <CircleX />
+            <h1 className="text-3xl font-bold text-[#1F2937]">
+              No Activities Yet
+            </h1>
+            <p className="text-[#64748B] max-w-xl">
+              Interact with friends more to create memories
+            </p>
+          </div>
+        </div>
+      ) : (
+        currTimeLine.map(
+          (message, index) =>
+            (filter === "all" && (
+              <HistoryCard key={index} message={message} />
+            )) ||
+            (filter === "Call" && message[0] === "Call" && (
+              <HistoryCard key={index} message={message} />
+            )) ||
+            (filter === "Video" && message[0] === "Video" && (
+              <HistoryCard key={index} message={message} />
+            )) ||
+            (filter === "Text" && message[0] === "Text" && (
+              <HistoryCard key={index} message={message} />
+            )),
+        )
       )}
     </div>
   );
