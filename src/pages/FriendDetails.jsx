@@ -6,10 +6,10 @@ import {
   MessageSquareMore,
   Video,
 } from "lucide-react";
-import { use, useContext } from "react";
+import { use, useContext, useEffect } from "react";
 import { useParams } from "react-router";
-import StatusCard from "../components/unique/homeComponents/StatusCard";
 import { TimelineContext } from "../context/TimeLineContext";
+import { TabContext } from "../context/CurrentTabContext";
 import { toast } from "react-toastify";
 
 const friendsPromise = fetch("/friends.json").then((res) => res.json());
@@ -22,6 +22,10 @@ export default function FriendDetails() {
   const status = expectedFriend.status;
 
   const { currTimeLine, setCurrTimeLine } = useContext(TimelineContext);
+  const { setCurrTab } = useContext(TabContext);
+  useEffect(() => {
+    setCurrTab("");
+  }, []);
 
   const getFormattedDate = () => {
     const now = new Date();
@@ -38,21 +42,21 @@ export default function FriendDetails() {
   const handleCall = () => {
     const date = getFormattedDate();
     const newMessage = ["Call", date, expectedFriend.name];
-    toast.success(`${expectedFriend.name} is called`);
+    toast.success(`Call with ${expectedFriend.name}`);
     setCurrTimeLine([...currTimeLine, newMessage]);
   };
 
   const handleText = () => {
     const date = getFormattedDate();
     const newMessage = ["Text", date, expectedFriend.name];
-    toast.success(`${expectedFriend.name} is messaged`);
+    toast.success(`Text with ${expectedFriend.name}`);
     setCurrTimeLine([...currTimeLine, newMessage]);
   };
 
   const handleVideoCall = () => {
     const date = getFormattedDate();
     const newMessage = ["Video", date, expectedFriend.name];
-    toast.success(`${expectedFriend.name} is video called`);
+    toast.success(`Video with ${expectedFriend.name}`);
     setCurrTimeLine([...currTimeLine, newMessage]);
   };
 
@@ -73,11 +77,11 @@ export default function FriendDetails() {
           >
             {status.toUpperCase()}
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-row md:flex-col lg:flex-row gap-2 md:gap-0 lg:gap-2 items-center justify-center">
             {expectedFriend.tags.map((tag, index) => (
               <div
                 key={index}
-                className="badge bg-[#CBFADB] text-[#244D3F] rounded-full font-medium text-xs mt-2 mb-3"
+                className="badge bg-[#CBFADB] text-[#244D3F] rounded-full font-medium text-xs mt-2 mb-3 md:mb-0 lg:mb-3"
               >
                 {tag.toUpperCase()}
               </div>
@@ -108,7 +112,9 @@ export default function FriendDetails() {
             <h2 className="text-[#244D3F] font-semibold text-lg lg:text-[22px]">
               {expectedFriend.days_since_contact}
             </h2>
-            <p className="text-[#64748B] text-sm lg:text-lg">Days Since Contact</p>
+            <p className="text-[#64748B] text-sm lg:text-lg">
+              Days Since Contact
+            </p>
           </div>
           <div className="bg-white p-4 flex flex-col items-center justify-center rounded-lg gap-2 text-center">
             <h2 className="text-[#244D3F] font-semibold text-lg lg:text-[22px]">

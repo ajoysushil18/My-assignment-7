@@ -1,3 +1,5 @@
+import { Plus } from "lucide-react";
+
 export default function Hero() {
   return (
     <div className="hero">
@@ -10,8 +12,9 @@ export default function Hero() {
           nurture the relationships that matter most.
         </p>
         <button className="btn btn-primary text-base font-semibold bg-green-800 text-white mt-4">
-          + Add a friend
+          <Plus /> Add a friend
         </button>
       </div>
     </div>
   );
+}

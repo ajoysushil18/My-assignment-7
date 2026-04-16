@@ -23,15 +23,15 @@ const rounter = createBrowserRouter([
         Component: HomePage,
       },
       {
-        path: "/timeline",
+        path: "timeline",
         Component: TimeLine,
       },
       {
-        path: "/stats",
+        path: "stats",
         Component: Stats,
       },
       {
-        path: "/friend/:id",
+        path: "friend/:id",
         Component: FriendDetails,
       },
     ],
