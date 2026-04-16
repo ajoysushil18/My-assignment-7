@@ -2,7 +2,7 @@ export default function Hero() {
   return (
     <div className="hero">
       <div className="hero-content text-center flex flex-col gap-4">
-        <h1 className="text-5xl font-bold">
+        <h1 className="text-3xl md:text-5xl font-bold text-[#1F2937]">
           Friends to keep close in your life
         </h1>
         <p className="text-[#64748B] max-w-xl">
@@ -15,4 +15,3 @@ export default function Hero() {
       </div>
     </div>
   );
-}
